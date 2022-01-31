@@ -57,6 +57,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _currentSelected = 0;
+
+  void selectDestination(int index) {
+    setState(() {
+      _currentSelected = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,23 +73,30 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         drawer: Drawer(
           child: SafeArea(
-            child: Column(
+            child:
+                Column(
               children: [
                 ListTile(
-                  title: Text('Home'),
+                  selected: _currentSelected == 0,
+                  title: Text(
+                    'Home',
+                  ),
                   leading: Icon(Icons.home),
                   trailing: Icon(Icons.arrow_forward_ios),
                   onTap: () {
-                    Navigator.of(context).pushNamed('/');
+                    selectDestination(0);
+                    Navigator.of(context).pop(); // Заменил Navigator.of(context).pushNamed
                   },
                 ),
                 ListTile(
+                  selected: _currentSelected == 1,
                   title: Text('Artists'),
                   leading: Icon(Icons.person),
                   trailing: Icon(Icons.arrow_forward_ios),
                   onTap: () {
-                    Navigator.of(context).pushNamed('/artists');
-                  },
+                    selectDestination(1);
+                    Navigator.of(context).pushNamed('/artists'); // если заменить на  Navigator.of(context).pushNamedAndRemoveUntil(('/artists'), (route) => false)
+                  },                                             // то исчезает кнопка "назад" на странице artists. а как вернуться?
                 ),
               ],
             ),

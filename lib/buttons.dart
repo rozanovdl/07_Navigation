@@ -24,8 +24,7 @@ Widget myGradientButton(buttonName, onPressedRoute, context, aboutArtist) {
             textStyle: const TextStyle(fontSize: 18),
           ),
           onPressed: () {
-            Navigator.of(context).pushNamed(onPressedRoute,
-                arguments: {'name': '$buttonName', 'about': '$aboutArtist'});
+            Navigator.of(context).pushNamed(onPressedRoute, arguments: {'name': '$buttonName', 'about': '$aboutArtist'});
           },
           child: Text(buttonName),
         )
